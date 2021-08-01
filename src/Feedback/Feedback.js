@@ -1,16 +1,14 @@
 import { Component } from "react";
-
+import FeedbackOptions from "./FeedbackOptions";
 import Statistic from "./Statistic/Statistic";
+import Section from "./Section/Section";
 
 class Feedback extends Component {
-  constructor() {
-    super();
-    this.state = {
-      good: 0,
-      neutral: 0,
-      bad: 0,
-    };
-  }
+  state = {
+    good: 0,
+    neutral: 0,
+    bad: 0,
+  };
 
   handleGoodClick = () => {
     this.setState({
@@ -44,13 +42,11 @@ class Feedback extends Component {
   render() {
     return (
       <div>
-        <h2>Please leave feedback</h2>
-        <div>
-          <button onClick={this.handleGoodClick}>Good</button>
-          <button onClick={this.handleNeutralClick}>Neutral</button>
-          <button onClick={this.handleBadClick}>Bad</button>
-        </div>
-        <div>
+        <Section title="Please leave feedback">
+          <FeedbackOptions handleInc={this.handleInc} />,
+        </Section>
+
+        <Section title="Statictics">
           {this.countTotalFeedback() ? (
             <Statistic
               good={this.state.good}
@@ -62,7 +58,7 @@ class Feedback extends Component {
           ) : (
             <span>No feedback given</span>
           )}
-        </div>
+        </Section>
       </div>
     );
   }
